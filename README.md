@@ -4,7 +4,7 @@ If you are a beginner, please go here [single_cell](https://github.com/bio-apple
 
 ### 1-1:算法分类
 
-![cluster](./cluster/cluster.jpg)
+<img src="./cluster/cluster.jpg" width=500 height=1200>
 
 [Zhang S, Li X, Lin J, et al. Review of single-cell RNA-seq data clustering for cell-type identification and characterization[J]. Rna, 2023, 29(5): 517-530.](https://rnajournal.cshlp.org/content/29/5/517.long)
 
