@@ -8,6 +8,8 @@ If you are a beginner, please go here [single_cell](https://github.com/bio-apple
 
 [Zhang S, Li X, Lin J, et al. Review of single-cell RNA-seq data clustering for cell-type identification and characterization[J]. Rna, 2023, 29(5): 517-530.]()
 
+(https://pmc.ncbi.nlm.nih.gov/articles/PMC11282907/)
+
 ### 1-2:算法评估Davies-Bouldin, ASW, NMI, ARI and V-Measure
 
 **Davies-Bouldin** 指数是一种用于评估聚类质量的指标，特别用于衡量聚类的紧密性（cohesion）和分离度（separation）。DBI 的值越小，表示聚类质量越好。
@@ -24,7 +26,7 @@ If you are a beginner, please go here [single_cell](https://github.com/bio-apple
 
 文献中比较了12 clustering algorithms算法，认为**SC3** and **Seurat** showing the most favorable results:https://github.com/markrobinsonuzh/scRNAseq_clustering_comparison
 
-[Duò A, Robinson M D, Soneson C. A systematic performance evaluation of clustering methods for single-cell RNA-seq data[J]. F1000Research, 2020, 7: 1141.]()
+[Duò A, Robinson M D, Soneson C. A systematic performance evaluation of clustering methods for single-cell RNA-seq data[J]. F1000Research, 2020, 7: 1141.](https://pmc.ncbi.nlm.nih.gov/articles/PMC6134335/)
 
 本文检查了15种不同的单细胞RNA-seq聚类算法在八个不同癌症数据集上的聚类性能。我们的结果表明，单细胞RNA-seq聚类算法按性能分为不同组别，在非恶性细胞上表现最佳的三个算法是：Seurat、bigSCale和Cell Ranger。然而，对于恶性细胞，另外两个算法通常表现更好，即Monocle和SC3。它们检测已知稀有细胞类型的能力也名列前茅，与Seurat并列。我们的方法和结果可被广泛的从业者用于分析癌症研究中的单细胞转录组数据。
 
