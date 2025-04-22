@@ -6,9 +6,16 @@ If you are a beginner, please go here [single_cell](https://github.com/bio-apple
 
 ![cluster](./cluster/cluster.jpg)
 
-[Zhang S, Li X, Lin J, et al. Review of single-cell RNA-seq data clustering for cell-type identification and characterization[J]. Rna, 2023, 29(5): 517-530.]()
+[Zhang S, Li X, Lin J, et al. Review of single-cell RNA-seq data clustering for cell-type identification and characterization[J]. Rna, 2023, 29(5): 517-530.](https://rnajournal.cshlp.org/content/29/5/517.long)
 
-(https://pmc.ncbi.nlm.nih.gov/articles/PMC11282907/)
+four popular existing clustering workflows:
+
+    Seurat’s implementation of the Louvain algorithm (denoted here as Seurat-Louvain), 
+    Seurat’s implementation of the Leiden algorithm (denoted here as Seurat-Leiden)2, 
+    Monocle’s cluster_cells function
+    SC3’s consensus clustering algorithm
+
+[Grabski I N, Street K, Irizarry R A. Significance analysis for clustering with single-cell RNA-sequencing data[J]. Nature Methods, 2023, 20(8): 1196-1202.](https://pmc.ncbi.nlm.nih.gov/articles/PMC11282907/)
 
 ### 1-2:算法评估Davies-Bouldin, ASW, NMI, ARI and V-Measure
 
@@ -24,7 +31,7 @@ If you are a beginner, please go here [single_cell](https://github.com/bio-apple
 
 ### 1-3:拓展阅读
 
-文献中比较了12 clustering algorithms算法，认为**SC3** and **Seurat** showing the most favorable results:https://github.com/markrobinsonuzh/scRNAseq_clustering_comparison
+文献中比较了12 clustering algorithms算法，认为**SC3** and **Seurat** showing the most favorable results
 
 [Duò A, Robinson M D, Soneson C. A systematic performance evaluation of clustering methods for single-cell RNA-seq data[J]. F1000Research, 2020, 7: 1141.](https://pmc.ncbi.nlm.nih.gov/articles/PMC6134335/)
 
