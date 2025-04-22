@@ -10,8 +10,8 @@ If you are a beginner, please go here [single_cell](https://github.com/bio-apple
 
 four popular existing clustering workflows:
 
-    Seurat’s implementation of the Louvain algorithm (denoted here as Seurat-Louvain), 
-    Seurat’s implementation of the Leiden algorithm (denoted here as Seurat-Leiden), 
+    Seurat’s implementation of the Louvain algorithm (denoted here as Seurat-Louvain)
+    Seurat’s implementation of the Leiden algorithm (denoted here as Seurat-Leiden)
     Monocle’s cluster_cells function
     SC3’s consensus clustering algorithm
 
