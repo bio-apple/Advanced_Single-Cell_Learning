@@ -53,7 +53,7 @@ clustree:https://lazappi.github.io/clustree/
 
 **Seurat** Plot clusters as a tree:https://satijalab.org/seurat/reference/plotclustertree
 
-![clustree](./cluster/clustree.png)
+<img src="./cluster/clustree.png" width=300 height=300>
 
 Plotting clustering trees:https://cran.r-project.org/web/packages/clustree/vignettes/clustree.html
 
