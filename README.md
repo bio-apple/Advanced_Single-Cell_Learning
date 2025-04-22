@@ -37,16 +37,16 @@ four popular existing clustering workflows:
 
 本文检查了15种不同的单细胞RNA-seq聚类算法在八个不同癌症数据集上的聚类性能。我们的结果表明，单细胞RNA-seq聚类算法按性能分为不同组别，在非恶性细胞上表现最佳的三个算法是：Seurat、bigSCale和Cell Ranger。然而，对于恶性细胞，另外两个算法通常表现更好，即Monocle和SC3。它们检测已知稀有细胞类型的能力也名列前茅，与Seurat并列。我们的方法和结果可被广泛的从业者用于分析癌症研究中的单细胞转录组数据。
 
-[Mahalanabis A, Turinsky A L, Husić M, et al. Evaluation of single-cell RNA-seq clustering algorithms on cancer tumor datasets[J]. Computational and Structural Biotechnology Journal, 2022, 20: 6375-6387.]()
+[Mahalanabis A, Turinsky A L, Husić M, et al. Evaluation of single-cell RNA-seq clustering algorithms on cancer tumor datasets[J]. Computational and Structural Biotechnology Journal, 2022, 20: 6375-6387.](https://pmc.ncbi.nlm.nih.gov/articles/PMC9677128/)
 
 如何选择最佳cluster数量，MultiK基于Seurat，总体上获取最佳的resolution parameters (from 0.05 to 2 with an increment of 0.05).原理如下：
 
 ![MultiK](./cluster/MultiK.png)
 
-[Liu S, Thennavan A, Garay J P, et al. MultiK: an automated tool to determine optimal cluster numbers in single-cell RNA sequencing data[J]. Genome biology, 2021, 22: 1-21.]()
+[Liu S, Thennavan A, Garay J P, et al. MultiK: an automated tool to determine optimal cluster numbers in single-cell RNA sequencing data[J]. Genome biology, 2021, 22: 1-21.](https://pmc.ncbi.nlm.nih.gov/articles/PMC8375188/)
 
 ![workflow](./cluster/workflow.png)
 
-[Tang M, Kaymaz Y, Logeman B L, et al. Evaluating single-cell cluster stability using the Jaccard similarity index[J]. Bioinformatics, 2021, 37(15): 2212-2214.]()
+[Tang M, Kaymaz Y, Logeman B L, et al. Evaluating single-cell cluster stability using the Jaccard similarity index[J]. Bioinformatics, 2021, 37(15): 2212-2214.](https://pmc.ncbi.nlm.nih.gov/articles/PMC8352506/)
 
-[Traag V A, Waltman L, Van Eck N J. From Louvain to Leiden: guaranteeing well-connected communities[J]. Scientific reports, 2019, 9(1): 1-12.]()
+[Traag V A, Waltman L, Van Eck N J. From Louvain to Leiden: guaranteeing well-connected communities[J]. Scientific reports, 2019, 9(1): 1-12.](https://pmc.ncbi.nlm.nih.gov/articles/PMC6435756/)
