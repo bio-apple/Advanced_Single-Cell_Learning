@@ -27,7 +27,7 @@ four popular existing clustering workflows:
 
 **Adjusted Rand Index** (ARI) 是一种广泛用于评估聚类结果与真实标签之间相似度的指标。它不仅考虑了聚类内的一致性，还考虑了聚类之间的差异性。ARI 进行调整，以消除随机聚类带来的影响。ARI 计算聚类标签与真实标签之间的相似性，得分范围从 -1 到 1，值越大表示聚类与真实标签的一致性越好。
 
-[Yu Z, Su Y, Lu Y, et al. Topological identification and interpretation for single-cell gene regulation elucidation across multiple platforms using scMGCA[J]. Nature Communications, 2023, 14(1): 400.]()
+[Yu Z, Su Y, Lu Y, et al. Topological identification and interpretation for single-cell gene regulation elucidation across multiple platforms using scMGCA[J]. Nature Communications, 2023, 14(1): 400.](https://pmc.ncbi.nlm.nih.gov/articles/PMC9877026/)
 
 ### 1-3:拓展阅读
 
