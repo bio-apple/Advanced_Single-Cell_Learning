@@ -49,4 +49,10 @@ four popular existing clustering workflows:
 
 [Tang M, Kaymaz Y, Logeman B L, et al. Evaluating single-cell cluster stability using the Jaccard similarity index[J]. Bioinformatics, 2021, 37(15): 2212-2214.](https://pmc.ncbi.nlm.nih.gov/articles/PMC8352506/)
 
+clustree:https://lazappi.github.io/clustree/
+
+**Seurat** Plot clusters as a tree:https://satijalab.org/seurat/reference/plotclustertree
+
+Plotting clustering trees:https://cran.r-project.org/web/packages/clustree/vignettes/clustree.html
+
 [Traag V A, Waltman L, Van Eck N J. From Louvain to Leiden: guaranteeing well-connected communities[J]. Scientific reports, 2019, 9(1): 1-12.](https://pmc.ncbi.nlm.nih.gov/articles/PMC6435756/)
