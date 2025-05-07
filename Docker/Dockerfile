@@ -8,4 +8,4 @@ RUN apk add --no-cache bash && mkdir -p /lib64/ /ref/ /script/ /raw_data/ /outdi
     /opt/conda/bin/pip3 install cellbender==0.3.0 &&  \
     /opt/conda/bin/conda install conda-forge::r-seurat  \
     bioconda::bioconductor-clusterprofiler bioconda::bioconductor-scdblfinder conda-forge::r-harmony &&  \
-    /opt/conda/bin/conda clean -a -y && rm -f /root/.condarc
+    rm -f /root/.condarc && /opt/conda/bin/conda clean -a -y
