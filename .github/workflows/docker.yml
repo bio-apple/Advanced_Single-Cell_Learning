@@ -10,8 +10,10 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_NAME }}" --password-stdin
+    - name: Docker Login
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_NAME }}" --password-stdin
 
-    - run: |
+    - name: Build and Push Docker Image
+      run: |
         docker build -f Docker/Dockerfile -t fanyucai1/scrna:latest .
         docker push fanyucai1/scrna:latest
