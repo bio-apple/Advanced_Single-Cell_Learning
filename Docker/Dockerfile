@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends  libcurl4-opens
     bash /miniforge.sh -b -p /opt/conda && \
     rm /miniforge.sh &&  \
     /opt/conda/bin/conda create -n r-base4.0.3 --channel conda-forge --channel bioconda --channel defaults --channel bioturing r-base==4.0.3 r-nichenetr && \
-    /opt/conda/bin/conda create -n r-base4.1.0 --channel conda-forge --channel bioconda --channel defaults --channel pwwang r-base==4.1.0 r-seurat r-seuratwrappers && \
+    /opt/conda/bin/conda create -n r-base4.1.0 --channel conda-forge --channel bioconda --channel defaults --channel pwwang r-base==4.1.0 r-seurat==5.3.0 r-seuratwrappers && \
     /opt/conda/bin/conda install -y conda-forge::r-base==4.4.3 conda-forge::r-devtools conda-forge::r-essentials conda-forge::r-biocmanager \
     bioconda::bioconductor-clusterprofiler bioconda::bioconductor-scdblfinder bioconda::bioconductor-singler bioconda::r-monocle3 bioconda::bioconductor-deseq2 bioconda::bioconductor-aucell \
     dnachun::r-cellchat bioconda::celltypist && \
