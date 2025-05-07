@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends  \
     wget -q -O /miniforge.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-${ARCH}.sh && \
     bash /miniforge.sh -b -p /opt/conda && \
     rm /miniforge.sh &&  \
-    /opt/conda/bin/conda install -y -c conda-forge r-base r-devtools && \
-    /opt/conda/bin/Rscript -e "install.packages(c('BiocManager', 'Seurat'), repos='https://cloud.r-project.org/')" && \
+    /opt/conda/bin/conda install -y -c conda-forge r-base r-devtools r-essentials r-biocmanager && \
+    /opt/conda/bin/Rscript -e "install.packages(c('Seurat'), repos='https://cloud.r-project.org/')" && \
     /opt/conda/bin/Rscript -e "BiocManager::install(c('scDblFinder', 'clusterProfiler'))" && \
     /opt/conda/bin/pip3 install --no-cache-dir cellbender==0.3.0 && \
     /opt/conda/bin/conda clean -a -y && \
