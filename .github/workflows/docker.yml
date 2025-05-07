@@ -1,4 +1,4 @@
-name: Docker Build & Push (Multi-platform Split)
+name: Docker Build & Push (Split by Platform)
 
 on:
   push:
@@ -6,40 +6,50 @@ on:
       - main
 
 jobs:
-  check-change:
+  check-dockerfile:
     runs-on: ubuntu-latest
     outputs:
       changed: ${{ steps.check.outputs.changed }}
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Check if Dockerfile has changed
+      - name: Check Dockerfile changes
         id: check
         run: |
           if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q 'Docker/Dockerfile'; then
-            echo "Dockerfile has changed."
             echo "changed=true" >> $GITHUB_OUTPUT
+            echo "Dockerfile changed."
           else
-            echo "No change in Dockerfile."
             echo "changed=false" >> $GITHUB_OUTPUT
+            echo "No change in Dockerfile."
           fi
 
-  build-amd64:
-    needs: check-change
-    if: needs.check-change.outputs.changed == 'true'
+  cleanup:
+    needs: check-dockerfile
+    if: needs.check-dockerfile.outputs.changed == 'true'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
       - name: Free up disk space
         run: |
+          echo "Before cleanup:"
+          df -h
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
           sudo apt-get clean
           docker system prune -af || true
+          echo "After cleanup:"
+          df -h
+
+  build-amd64:
+    needs: cleanup
+    runs-on: ubuntu-latest
+    if: needs.check-dockerfile.outputs.changed == 'true'
+    steps:
+      - uses: actions/checkout@v3
       - uses: docker/setup-buildx-action@v3
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-      - name: Build amd64
+      - name: Build amd64 image
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -49,15 +59,15 @@ jobs:
           tags: fanyucai1/scrna:amd64
 
   build-arm64:
-    needs: check-change
-    if: needs.check-change.outputs.changed == 'true'
+    needs: cleanup
     runs-on: ubuntu-latest
+    if: needs.check-dockerfile.outputs.changed == 'true'
     steps:
       - uses: actions/checkout@v3
       - uses: docker/setup-buildx-action@v3
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-      - name: Build arm64
+      - name: Build arm64 image
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -68,8 +78,8 @@ jobs:
 
   manifest:
     needs: [build-amd64, build-arm64]
-    if: needs.check-change.outputs.changed == 'true'
     runs-on: ubuntu-latest
+    if: needs.check-dockerfile.outputs.changed == 'true'
     steps:
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
