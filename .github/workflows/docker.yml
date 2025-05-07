@@ -1,4 +1,4 @@
-name: Docker Build & Push (Multi-platform)
+name: Docker Build & Push (Multi-platform Split)
 
 on:
   push:
@@ -6,50 +6,76 @@ on:
       - main
 
 jobs:
-  docker:
+  check-change:
     runs-on: ubuntu-latest
-
+    outputs:
+      changed: ${{ steps.check.outputs.changed }}
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Check if Dockerfile has changed
-      id: check_dockerfile
-      run: |
-        echo "Checking if Dockerfile has changed..."
-        git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q 'Docker/Dockerfile'
-        echo "Dockerfile change detected: $?"
-      continue-on-error: true # 防止没有变动时失败
+      - name: Check if Dockerfile has changed
+        id: check
+        run: |
+          if git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q 'Docker/Dockerfile'; then
+            echo "Dockerfile has changed."
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "No change in Dockerfile."
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
 
-    - name: Skip build if no change in Dockerfile
-      if: steps.check_dockerfile.outputs.Dockerfile == '0' # 只在 Dockerfile 有变化时才继续执行构建
-      run: echo "Skipping Docker build as Dockerfile has not changed."
+  build-amd64:
+    needs: check-change
+    if: needs.check-change.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Free up disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+          sudo apt-get clean
+          docker system prune -af || true
+      - uses: docker/setup-buildx-action@v3
+      - name: Docker Login
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Build amd64
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Docker/Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: fanyucai1/scrna:amd64
 
-    - name: Free up disk space
-      run: |
-        echo "Before cleanup:"
-        df -h
-        sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
-        sudo apt-get clean
-        docker system prune -af || true
-        echo "After cleanup:"
-        df -h
+  build-arm64:
+    needs: check-change
+    if: needs.check-change.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/setup-buildx-action@v3
+      - name: Docker Login
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Build arm64
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: Docker/Dockerfile
+          platforms: linux/arm64
+          push: true
+          tags: fanyucai1/scrna:arm64
 
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
-
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
-
-    - name: Docker Login
-      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
-
-    - name: Build and Push Docker Image (multi-platform)
-      if: steps.check_dockerfile.outputs.Dockerfile == '0'  # 只有在有变化时才执行构建
-      uses: docker/build-push-action@v5
-      with:
-        context: .
-        file: Docker/Dockerfile
-        platforms: linux/amd64,linux/arm64
-        push: true
-        tags: fanyucai1/scrna:latest
+  manifest:
+    needs: [build-amd64, build-arm64]
+    if: needs.check-change.outputs.changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Docker Login
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      - name: Create and push multi-platform manifest
+        run: |
+          docker manifest create fanyucai1/scrna:latest \
+            fanyucai1/scrna:amd64 \
+            fanyucai1/scrna:arm64
+          docker manifest push fanyucai1/scrna:latest
