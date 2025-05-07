@@ -3,8 +3,8 @@ FROM ubuntu:20.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 # 安装系统依赖
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    bash wget ca-certificates curl bzip2 gnupg git libssl-dev libffi-dev libz-dev libbz2-dev gcc && \
+RUN apt-get update && apt-get install -y --no-install-recommends  \
+    build-essential wget curl ca-certificates bzip2 gnupg git libssl-dev libffi-dev libz-dev libbz2-dev && \
     mkdir -p /ref/ /script/ /raw_data/ /outdir/ && \
     rm -rf /var/lib/apt/lists/* && ARCH=$(uname -m) && \
     wget -q -O /miniforge.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-${ARCH}.sh && \
