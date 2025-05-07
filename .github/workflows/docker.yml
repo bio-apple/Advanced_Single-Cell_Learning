@@ -13,6 +13,18 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    - name: Check if Dockerfile has changed
+      id: check_dockerfile
+      run: |
+        echo "Checking if Dockerfile has changed..."
+        git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -q 'Docker/Dockerfile'
+        echo "Dockerfile change detected: $?"
+      continue-on-error: true # 防止没有变动时失败
+
+    - name: Skip build if no change in Dockerfile
+      if: steps.check_dockerfile.outputs.Dockerfile == '0' # 只在 Dockerfile 有变化时才继续执行构建
+      run: echo "Skipping Docker build as Dockerfile has not changed."
+
     - name: Free up disk space
       run: |
         echo "Before cleanup:"
@@ -33,6 +45,7 @@ jobs:
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
     - name: Build and Push Docker Image (multi-platform)
+      if: steps.check_dockerfile.outputs.Dockerfile == '0'  # 只有在有变化时才执行构建
       uses: docker/build-push-action@v5
       with:
         context: .
