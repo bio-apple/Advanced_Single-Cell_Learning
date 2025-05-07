@@ -10,10 +10,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends  libcurl4-opens
     wget -q -O /miniforge.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-${ARCH}.sh && \
     bash /miniforge.sh -b -p /opt/conda && \
     rm /miniforge.sh &&  \
-    /opt/conda/bin/conda create -n r-base4.0 --channel conda-forge --channel bioconda --channel defaults --channel bioturing r-base==4.0.3 r-nichenetr && \
-    /opt/conda/bin/conda install -y conda-forge::r-base==4.4.3 conda-forge::r-devtools conda-forge::r-essentials conda-forge::r-biocmanager conda-forge::r-seurat==5.3.0 conda-forge::r-harmony \
+    /opt/conda/bin/conda create -n r-base4.0.3 --channel conda-forge --channel bioconda --channel defaults --channel bioturing r-base==4.0.3 r-nichenetr && \
+    /opt/conda/bin/conda create -n r-base4.1.0 --channel conda-forge --channel bioconda --channel defaults --channel pwwang r-base==4.1.0 r-seurat r-seuratwrappers && \
+    /opt/conda/bin/conda install -y conda-forge::r-base==4.4.3 conda-forge::r-devtools conda-forge::r-essentials conda-forge::r-biocmanager \
     bioconda::bioconductor-clusterprofiler bioconda::bioconductor-scdblfinder bioconda::bioconductor-singler bioconda::r-monocle3 bioconda::bioconductor-deseq2 bioconda::bioconductor-aucell \
-    dnachun::r-cellchat bioconda::celltypist pwwang::r-seuratwrappers && \
+    dnachun::r-cellchat bioconda::celltypist && \
     /opt/conda/bin/pip3 install --no-cache-dir cellbender==0.3.0 && \
     /opt/conda/bin/conda clean -a -y && \
     rm -f /root/.condarc
