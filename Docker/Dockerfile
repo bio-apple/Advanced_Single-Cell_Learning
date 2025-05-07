@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     wget -q -O /miniforge.sh https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-Linux-${ARCH}.sh && \
     bash /miniforge.sh -b -p /opt/conda && \
     rm /miniforge.sh &&  \
-    /opt/conda/bin/pip install --no-cache-dir cellbender==0.3.0 && \
-    conda install -y -c conda-forge r-seurat r-harmony && \
-    conda install -y -c bioconda bioconductor-clusterprofiler bioconductor-scdblfinder && \
-    conda clean -a -y && \
+    /opt/conda/bin/pip3 install --no-cache-dir cellbender==0.3.0 && \
+    /opt/conda/bin/conda install -y -c conda-forge r-seurat r-harmony && \
+    /opt/conda/bin/conda install -y -c bioconda bioconductor-clusterprofiler bioconductor-scdblfinder && \
+    /opt/conda/bin/conda clean -a -y && \
     rm -f /root/.condarc
