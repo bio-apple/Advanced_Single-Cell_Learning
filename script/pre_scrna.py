@@ -21,3 +21,7 @@ def scDblFinder():
     #The scDblFinder package gathers various methods for the detection and handling of doublets/multiplets in single-cell sequencing data (i.e. multiple cells captured within the same droplet or reaction volume), including the novel scDblFinder method.
     #Germain P L, Lun A, Meixide C G, et al. Doublet identification in single-cell sequencing data using scDblFinder[J]. f1000research, 2022, 10: 979.
     pass
+
+
+if __name__ == "__main__":
+    parser=argparse.ArgumentParser("")
