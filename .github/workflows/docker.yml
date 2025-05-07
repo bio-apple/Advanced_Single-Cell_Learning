@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+    - run: echo "${{ secrets.PASSWORD }}" | docker login -u "${{ secrets.NAME }}" --password-stdin
 
     - run: |
         docker build -f Docker/Dockerfile -t fanyucai1/scrna:latest .
