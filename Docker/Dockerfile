@@ -1,4 +1,4 @@
-FROM alpine:latest AS base
+FROM alpine:latest
 RUN apk add --no-cache bash && mkdir -p /lib64/ /ref/ /script/ /raw_data/ /outdir/ &&  \
     wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub && \
     wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.35-r1/glibc-2.35-r1.apk &&  \
@@ -9,3 +9,4 @@ RUN apk add --no-cache bash && mkdir -p /lib64/ /ref/ /script/ /raw_data/ /outdi
     /opt/conda/bin/conda install conda-forge::r-seurat  \
     bioconda::bioconductor-clusterprofiler bioconda::bioconductor-scdblfinder conda-forge::r-harmony &&  \
     rm -f /root/.condarc && /opt/conda/bin/conda clean -a -y
+
