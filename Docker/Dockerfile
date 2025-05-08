@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends  libcurl4-opens
     /opt/conda/bin/conda create -n r-base4.4.3 --channel conda-forge --channel bioconda --channel defaults r-base==4.4.3 r-seurat==5.3.0 r-remotes r-signac dnachun::r-cellchat &&  \
     /opt/conda/envs/r-base4.4.3/bin/Rscript -e "remotes::install_github(c('satijalab/seurat-data', 'satijalab/azimuth', 'satijalab/seurat-wrappers'), quiet = TRUE)" && \
     /opt/conda/bin/conda create -n r-base4.0.3 --channel conda-forge --channel bioconda --channel defaults --channel bioturing r-base==4.0.3 r-nichenetr  \
-    r-devtools r-essentials r-biocmanager bioconductor-clusterprofiler bioconductor-scdblfinder bioconductor-singler r-monocle3 bioconductor-deseq2 bioconductor-aucell celltypist cellbender==0.3.2 && \
+    r-devtools r-essentials r-biocmanager bioconductor-clusterprofiler bioconductor-scdblfinder bioconductor-singler r-monocle3 bioconductor-deseq2 bioconductor-aucell celltypist && \
+    /opt/conda/bin/conda install bioconda::cellbender && \
     /opt/conda/bin/conda clean -a -y
 
